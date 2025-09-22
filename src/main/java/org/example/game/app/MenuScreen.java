@@ -3,9 +3,11 @@ package org.example.game.app;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class MenuScreen extends VBox {
 
@@ -59,8 +61,10 @@ public class MenuScreen extends VBox {
     }
 
     private void newGame() {
-        //TODO:
-        System.out.println("new game");
+        Stage window = (Stage) getScene().getWindow();
+
+        GameState state = new GameState(4);
+        window.setScene(new Scene(new GameScreen(state), 320, 240));
     }
 
 }
