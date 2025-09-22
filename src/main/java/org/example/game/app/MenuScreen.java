@@ -62,9 +62,7 @@ public class MenuScreen extends VBox {
 
     private void newGame() {
         Stage window = (Stage) getScene().getWindow();
-
-        GameState state = new GameState(4);
-        window.setScene(new Scene(new GameScreen(state), 320, 240));
+        window.setScene(new Scene(new GameScreen(3), 320, 240));
     }
 
 }
