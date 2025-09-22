@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class GameState {
 
     // X x Y;
-    private int size;
-    private int[][] data;
+    private final int size;
+    private final int[][] data;
 
     public GameState(int size) {
         this.size = size;
