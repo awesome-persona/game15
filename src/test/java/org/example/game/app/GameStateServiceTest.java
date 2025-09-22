@@ -105,8 +105,8 @@ public class GameStateServiceTest {
         sample = new int[][]
                 {
                         {1, 4, 5},
-                        {3, 2, 0},
-                        {7, 6, 8}
+                        {3, 6, 2},
+                        {7, 0, 8}
                 };
         GameStateUtils.set(expected, sample);
         assertEquals(expected, actual, "Move tile 6\nExpected:\n" + expected + " Actual:\n" + actual);
