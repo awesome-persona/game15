@@ -8,6 +8,8 @@ public class GameStateService implements IGameStateService {
 
     private static GameStateService instance;
 
+    private GameState gameState;
+
     private GameStateService() {
     }
 
@@ -20,7 +22,17 @@ public class GameStateService implements IGameStateService {
 
 
     @Override
-    public GameState initNewGameState(int size) {
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    @Override
+    public void loadGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
+
+    @Override
+    public void initNewGameState(int size) {
         GameState newGameState = new GameState(size);
         List<Integer> nums = new ArrayList<>(size * size);
         for (int i = 0; i < size * size; i++) {
@@ -30,7 +42,7 @@ public class GameStateService implements IGameStateService {
         for (int i = 0; i < size * size; i++) {
             newGameState.getData()[i / size][i % size] = nums.remove(random.nextInt(nums.size()));
         }
-        return newGameState;
+        gameState = newGameState;
     }
 
     @Override

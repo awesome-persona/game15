@@ -1,8 +1,9 @@
 package org.example.game.app;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class GameState {
+public class GameState implements Serializable {
 
     // X x Y;
     private final int size;

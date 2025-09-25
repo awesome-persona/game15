@@ -18,7 +18,8 @@ public class GameStateServiceTest {
     @ParameterizedTest
     @ValueSource(ints = {3, 4, 5, 6, 7})
     public void testInitNewGameState(int n) {
-        GameState gameState = service.initNewGameState(n);
+        service.initNewGameState(n);
+        GameState gameState = service.getGameState();
         assertEquals(n, gameState.getSize(), "game board size is not valid");
         assertEquals(n, gameState.getData().length, "game board size is not valid");
         for (int i = 0; i < gameState.getData().length; i++) {

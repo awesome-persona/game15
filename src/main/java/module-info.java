@@ -7,4 +7,6 @@ module org.example.game {
     exports org.example.game;
     exports org.example.game.app;
     opens org.example.game.app to javafx.fxml;
+    exports org.example.game.app.view;
+    opens org.example.game.app.view to javafx.fxml;
 }
