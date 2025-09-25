@@ -29,6 +29,17 @@ public class GameScreen extends VBox {
         GameMenuBar gameMenuBar = new GameMenuBar();
         getChildren().add(gameMenuBar);
 
+        getScene().getWindow().setOnCloseRequest(e -> gameMenuBar.doOnQuitGameClick());
+        setOnKeyPressed(keyEvent -> {
+            switch (keyEvent.getCode()) {
+                case Q -> gameMenuBar.doOnQuitGameClick();
+                case N -> gameMenuBar.doOnNewGameClick();
+                case L -> gameMenuBar.doOnLoadGameClick();
+                case S -> gameMenuBar.doOnSaveGameClick();
+            }
+        });
+
+
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(10);

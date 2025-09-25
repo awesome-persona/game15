@@ -12,6 +12,17 @@ public class MenuScreen extends VBox {
         GameMenuBar gameMenuBar = new GameMenuBar(true);
         getChildren().add(gameMenuBar);
 
+        setOnKeyPressed(keyEvent -> {
+            switch (keyEvent.getCode()) {
+                case Q -> gameMenuBar.doOnQuitGameClick();
+                case N -> gameMenuBar.doOnNewGameClick();
+                case L -> gameMenuBar.doOnLoadGameClick();
+                case S -> gameMenuBar.doOnSaveGameClick();
+            }
+        });
+
+
+
         {
             setAlignment(Pos.CENTER);
             setSpacing(20.0);
@@ -21,14 +32,6 @@ public class MenuScreen extends VBox {
 
             Label title = new Label("Game 15");
             getChildren().add(title);
-
-            setOnKeyPressed(keyEvent -> {
-                switch (keyEvent.getCode()) {
-                    case Q -> gameMenuBar.doOnQuitGameClick();
-                    case N -> gameMenuBar.doOnNewGameClick();
-                    case L -> gameMenuBar.doOnLoadGameClick();
-                }
-            });
         }
 
         {

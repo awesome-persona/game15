@@ -2,6 +2,10 @@ package org.example.game.app.view;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -16,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Optional;
 
 public class GameMenuBar extends MenuBar {
 
@@ -61,7 +66,7 @@ public class GameMenuBar extends MenuBar {
         File file = fileChooser.showOpenDialog(window);
 
         try (var fis = new FileInputStream(file);
-             var ois = new ObjectInputStream(fis)){
+             var ois = new ObjectInputStream(fis)) {
             GameState gameState = (GameState) ois.readObject();
             gameStateService.loadGameState(gameState);
         } catch (Exception e) {
@@ -81,7 +86,7 @@ public class GameMenuBar extends MenuBar {
         File file = fileChooser.showSaveDialog(getScene().getWindow());
 
         try (var fos = new FileOutputStream(file);
-             var oos = new ObjectOutputStream(fos)){
+             var oos = new ObjectOutputStream(fos)) {
             oos.writeObject(gameStateService.getGameState());
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,7 +94,21 @@ public class GameMenuBar extends MenuBar {
     }
 
     public void doOnQuitGameClick() {
-        Platform.exit();
+        Dialog<ButtonType> stringDialog = new Dialog<>();
+        stringDialog.getDialogPane().getButtonTypes().add(new ButtonType("NO", ButtonBar.ButtonData.NO));
+        stringDialog.getDialogPane().getButtonTypes().add(new ButtonType("YES", ButtonBar.ButtonData.OK_DONE));
+        stringDialog.setTitle("You are about to exit");
+        stringDialog.setContentText("Are you sure about it?");
+        Optional<ButtonType> s = stringDialog.showAndWait();
+        ButtonType buttonType = s.get();
+        switch (buttonType.getButtonData()) {
+            case OK_DONE -> Platform.exit();
+            case NO -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setContentText("Good choice");
+                alert.showAndWait();
+            }
+        }
     }
 
 }
